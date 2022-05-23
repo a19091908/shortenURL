@@ -17,5 +17,6 @@
 		<button form="form1">Submit</button>
 	</div>
 </form>
+<div>${shortURL}</div>
 </body>
 </html>
