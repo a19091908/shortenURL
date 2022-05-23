@@ -1,0 +1,1 @@
+INSERT INTO URL (hash, originalURL) VALUES ('1', 'test');
