@@ -5,7 +5,6 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 import com.example.shortenURL.common.CommCode;
@@ -14,14 +13,29 @@ import com.example.shortenURL.service.repository.UrlDAO;
 
 @Service
 public class ShortenServiceImpl {
+	static final public int HASH_LEN = 6;
+	
 	@Autowired
 	UrlDAO urlDAO;
 	
+	@Autowired
+	CommCode commCode;
+	
 	public String generateShortURL(URL url) {
-		CommCode commCode = new CommCode();
 		String shortURL = null;
 		try {
-			shortURL = commCode.convertByBase64(commCode.convertByMD5(url.getOriginalURL()));
+			String base64ShortURL = commCode.convertByPaddingAndMD5AndBase64(url.getOriginalURL());
+			shortURL = commCode.chooseRandomCharacters(HASH_LEN, base64ShortURL);
+			if (urlDAO.existsById(shortURL)) {
+				int times = 0;
+				boolean isUnique = false;
+				while (isUnique == false && times < 10) {
+					shortURL = commCode.chooseRandomCharacters(HASH_LEN, base64ShortURL);
+					isUnique = urlDAO.existsById(shortURL) == false;
+					times++;
+				}
+				if (isUnique == false) return null;
+			}
 			url.setHash(shortURL);
 			urlDAO.saveAndFlush(url);
 		} catch (Exception e) {

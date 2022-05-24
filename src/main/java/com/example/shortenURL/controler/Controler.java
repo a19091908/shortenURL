@@ -44,7 +44,8 @@ public class Controler {
 	public ModelAndView redirect(@PathVariable String hash, final Model model) {
 		String originalURL = shortenServiceImpl.getOriginalURL(hash);	
 		if (originalURL == null) {
-			originalURL = "index";
+			model.addAttribute("shortURL", "");
+			return new ModelAndView("index");
 		}
 		return new ModelAndView("redirect:" + originalURL);
 	}
