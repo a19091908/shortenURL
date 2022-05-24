@@ -16,7 +16,7 @@ import com.example.shortenURL.service.Impl.ShortenServiceImpl;
 @Controller
 public class Controler {
 	
-	final static String REDIRECT = "redirect";
+	final static public String REDIRECT = "redirect";
 	
 	@Autowired
 	ShortenServiceImpl shortenServiceImpl;
@@ -31,16 +31,8 @@ public class Controler {
 		
 		String shortURL = shortenServiceImpl.generateShortURL(url);
 		if (shortURL != null) {
-			StringBuilder sb = new StringBuilder();
-			sb.append(request.getScheme())
-			  .append("://")
-			  .append(request.getServerName())
-			  .append(":")
-			  .append(request.getServerPort())
-			  .append(request.getContextPath())
-			  .append("/").append(REDIRECT)
-			  .append("/").append(shortURL);
-			model.addAttribute("shortURL", sb.toString());
+			shortURL = shortenServiceImpl.getFullURL(shortURL, request);
+			model.addAttribute("shortURL", shortURL);
 		}else {
 			model.addAttribute("shortURL", "");
 		}

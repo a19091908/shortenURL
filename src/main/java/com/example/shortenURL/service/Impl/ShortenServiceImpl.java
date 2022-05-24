@@ -2,7 +2,10 @@ package com.example.shortenURL.service.Impl;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 import com.example.shortenURL.common.CommCode;
@@ -31,5 +34,18 @@ public class ShortenServiceImpl {
 	public String getOriginalURL(String hash) {
 		Optional<URL> urlOptional = urlDAO.findById(hash);
 		return urlOptional.isPresent() ? urlOptional.get().getOriginalURL() : null;
+	}
+
+	public String getFullURL(String shortURL, HttpServletRequest request) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(request.getScheme())
+		  .append("://")
+		  .append(request.getServerName())
+		  .append(":")
+		  .append(request.getServerPort())
+		  .append(request.getContextPath())
+		  .append("/").append(com.example.shortenURL.controler.Controler.REDIRECT)
+		  .append("/").append(shortURL);
+		return sb.toString();
 	}
 }
