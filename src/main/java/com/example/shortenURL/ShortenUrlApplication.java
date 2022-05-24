@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
-@EntityScan(basePackages = "com.example.shortenURL.obj")
+@EntityScan(basePackages = "com.example.shortenURL.model")
 @EnableJpaRepositories("com.example.shortenURL.service.repository")
 @SpringBootApplication
 public class ShortenUrlApplication {

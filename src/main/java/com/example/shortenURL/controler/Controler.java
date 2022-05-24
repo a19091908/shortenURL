@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.shortenURL.common.CommURL;
-import com.example.shortenURL.obj.URL;
+import com.example.shortenURL.model.URL;
 import com.example.shortenURL.service.Impl.ShortenServiceImpl;
 
 @Controller

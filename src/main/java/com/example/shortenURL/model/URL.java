@@ -1,4 +1,4 @@
-package com.example.shortenURL.obj;
+package com.example.shortenURL.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

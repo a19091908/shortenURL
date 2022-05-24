@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.shortenURL.common.CommCode;
-import com.example.shortenURL.obj.URL;
+import com.example.shortenURL.model.URL;
 import com.example.shortenURL.service.repository.UrlDAO;
 
 @Service
