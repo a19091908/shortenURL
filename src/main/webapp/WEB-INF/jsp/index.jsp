@@ -20,12 +20,14 @@
 <br>
 <c:choose>
     <c:when test="${shortURL==''}">
-        <div>Fail</div>
+        <div>ERROR</div>
     </c:when>    
     <c:otherwise>
        <div><span>Short URL: ${shortURL}</span></div>
     </c:otherwise>
 </c:choose>
+
+<h3>${errorMessage}</h3>
 
 </body>
 </html>
