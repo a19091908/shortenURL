@@ -1,5 +1,7 @@
 package com.example.shortenURL.service.Impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,5 +26,10 @@ public class ShortenServiceImpl {
 		}
 
 		return shortURL;
+	}
+
+	public String getOriginalURL(String hash) {
+		Optional<URL> urlOptional = urlDAO.findById(hash);
+		return urlOptional.isPresent() ? urlOptional.get().getOriginalURL() : null;
 	}
 }

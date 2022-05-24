@@ -13,7 +13,7 @@ public class CommCode {
 	}
 
 	public String convertByBase64(byte[] originalBytes){
-		return Base64.getEncoder().withoutPadding().encodeToString(originalBytes);
+		return Base64.getUrlEncoder().withoutPadding().encodeToString(originalBytes);
 	}
 
 }
